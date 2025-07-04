@@ -1,11 +1,14 @@
 # funnyscript
 sysadmin at work means... script in bash!
 
+```bash
 {
 PARTITION=ochvh
 sessiondump --allkeys | grep '.session.ad.last.attr.cn.*icinga_krb5' | cut -d'.' -f1 | xargs -I {} sessiondump --sid {} | grep 'session.server.network.name.default' | grep $PARTITION | cut -d' ' -f3 | sort | uniq
 }
+```
 
+```bash
 {
 echo -e "
 ./.git/COMMIT_EDITMSG
@@ -23,3 +26,4 @@ echo -e "
 ./.git/objects/50/55684dfe33c9faa88d61d3733101509f39b9e8
 ./.git/refs/heads/master" | while read n;do ls $n;sudo chown pfun:users $n;done;make push
 }
+```
