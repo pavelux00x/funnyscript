@@ -27,3 +27,31 @@ echo -e "
 ./.git/refs/heads/master" | while read n;do ls $n;sudo chown pfun:users $n;done;make push
 }
 ```
+
+Playing with AWX API / jq ..
+```bash
+{
+INV=1280
+BASE_URL=https://x.x.x
+URL=https://x.x.x/api/v2/inventories/$INV/hosts/
+TOKEN=x
+ID_LIST=""
+for i in {1..100};do
+STATUS=$(curl --silent -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -o /dev/null -s -w "%{http_code}\n" ${URL}?page=$i)
+echo $STATUS
+if [ "$STATUS" == "200" ];then
+ID=$(curl --silent -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X GET ${URL}?page=$i | jq .results[].related.job_host_summaries)
+echo $ID
+ID+=" "
+ID_LIST+=$ID
+else
+break
+fi
+done
+for i in $ID_LIST
+do
+curl --silent -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X GET ${BASE_URL}${i//\"}?failed=true | jq '.results[] | "\(.summary_fields.host.name): \(.summary_fields.job.status)"' | sort | uniq
+done
+}
+
+```
