@@ -53,6 +53,7 @@ do
 curl --silent -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" -X GET ${BASE_URL}${i//\"}?failed=true | jq '.results[] | "\(.summary_fields.host.name): \(.summary_fields.job.status)"' | sort | uniq
 done
 }
+```
 
 ```bash
 {
@@ -82,4 +83,4 @@ done
 } | wc -w
 ```
 
-```
+
