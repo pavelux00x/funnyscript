@@ -55,6 +55,7 @@ done
 }
 ```
 
+awx pt2, find last failed job on hosts from invent
 ```bash
 {
 TOKEN=x
