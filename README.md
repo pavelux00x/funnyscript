@@ -54,4 +54,32 @@ curl --silent -H "Content-Type: application/json" -H "Authorization: Bearer $TOK
 done
 }
 
+```bash
+{
+TOKEN=x
+URL=x
+HEADER_1="Content-Type: application/json"
+HEADER_2="Authorization: Bearer $TOKEN"
+INVENTORY=1340
+TODO=inventories/$INVENTORY/hosts/
+METHOD=GET
+JOBS=""
+for i in {1..100};do
+STATUS=$(curl -X $METHOD -H "$HEADER_1" -H "$HEADER_2" ${URL}/${TODO}?page=$i -o /dev/null -s -w "%{http_code}\n")
+if [ "$STATUS" == "200" ];then
+#ID=$(curl -X $METHOD -H "$HEADER_1" -H "$HEADER_2" ${URL}/${TODO}?page=$i | jq.results.
+LAST_SUMMARY_JOB=$(curl -s -X $METHOD -H "$HEADER_1" -H "$HEADER_2" ${URL}/${TODO}?page=$i | jq .results[].related.last_job_host_summary)
+LAST_SUMMARY_JOB+=" "
+JOBS+=$LAST_SUMMARY_JOB
+else
+break
+fi
+done
+for i in $JOBS;
+do 
+curl -s -X $METHOD -H "$HEADER_1" -H "$HEADER_2" x${i//\"} | jq 'select(.failed==true) | .host_name' | sort | uniq  
+done
+} | wc -w
+```
+
 ```
