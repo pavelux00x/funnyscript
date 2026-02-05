@@ -1,5 +1,4 @@
 # funnyscript
-sysadmin at work means... script in bash!
 
 ```bash
 {
@@ -84,31 +83,4 @@ done
 } | wc -w
 ```
 
-
-
-[2025-08-04 15:31:31 +0200] [2485470] [ERROR] Socket error processing request.
-Traceback (most recent call last):
-  File "/inventories/tuxtstmaints/automated-patching/flask_app/env/lib64/python3.6/site-packages/gunicorn/workers/sync.py", line 134, in handle
-    req = next(parser)
-  File "/inventories/tuxtstmaints/automated-patching/flask_app/env/lib64/python3.6/site-packages/gunicorn/http/parser.py", line 42, in __next__
-    self.mesg = self.mesg_class(self.cfg, self.unreader, self.source_addr, self.req_count)
-  File "/inventories/tuxtstmaints/automated-patching/flask_app/env/lib64/python3.6/site-packages/gunicorn/http/message.py", line 184, in __init__
-    super().__init__(cfg, unreader, peer_addr)
-  File "/inventories/tuxtstmaints/automated-patching/flask_app/env/lib64/python3.6/site-packages/gunicorn/http/message.py", line 55, in __init__
-    unused = self.parse(self.unreader)
-  File "/inventories/tuxtstmaints/automated-patching/flask_app/env/lib64/python3.6/site-packages/gunicorn/http/message.py", line 196, in parse
-    self.get_data(unreader, buf, stop=True)
-  File "/inventories/tuxtstmaints/automated-patching/flask_app/env/lib64/python3.6/site-packages/gunicorn/http/message.py", line 187, in get_data
-    data = unreader.read()
-  File "/inventories/tuxtstmaints/automated-patching/flask_app/env/lib64/python3.6/site-packages/gunicorn/http/unreader.py", line 37, in read
-    d = self.chunk()
-  File "/inventories/tuxtstmaints/automated-patching/flask_app/env/lib64/python3.6/site-packages/gunicorn/http/unreader.py", line 64, in chunk
-    return self.sock.recv(self.mxchunk)
-  File "/usr/lib64/python3.6/ssl.py", line 990, in recv
-    return self.read(buflen)
-  File "/usr/lib64/python3.6/ssl.py", line 867, in read
-    return self._sslobj.read(len, buffer)
-  File "/usr/lib64/python3.6/ssl.py", line 592, in read
-    v = self._sslobj.read(len)
-OSError: [Errno 0] Error
 
